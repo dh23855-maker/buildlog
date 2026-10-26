@@ -8,3 +8,10 @@ pydantic-settings==2.16.1
 # 서버 테스트
 pytest==9.1.1
 httpx2==2.16.0
+
+# 데이터베이스
+SQLAlchemy==2.1.6
+alembic==1.20.1
+
+# 비밀번호 보호
+pwdlib[argon2]==0.3.1
