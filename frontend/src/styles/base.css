@@ -1,0 +1,54 @@
+:root {
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-text: #1f2328;
+  --color-text-muted: #59636e;
+  --color-border: #d1d9e0;
+  --color-success: #1a7f37;
+  --color-danger: #cf222e;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.page-title {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.page-subtitle {
+  margin: 0 0 24px;
+  color: var(--color-text-muted);
+}
+
+.status {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.status-connected {
+  color: var(--color-success);
+}
+
+.status-failed {
+  color: var(--color-danger);
+}
