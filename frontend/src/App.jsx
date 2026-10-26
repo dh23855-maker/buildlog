@@ -1,39 +1,61 @@
-import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router'
 
-import { checkHealth } from './api/health.js'
-
-const STATUS_MESSAGES = {
-  checking: '서버 연결을 확인하는 중입니다.',
-  connected: '서버 연결됨',
-  failed: '서버에 연결하지 못했습니다. 서버가 켜져 있는지 확인해 주세요.',
-}
+import { AuthProvider } from './AuthContext.jsx'
+import Layout from './components/Layout.jsx'
+import { GuestOnly, RequireAuth } from './components/RouteGuards.jsx'
+import AccountSettingsPage from './pages/AccountSettingsPage.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import SignupPage from './pages/SignupPage.jsx'
 
 export default function App() {
-  const [status, setStatus] = useState('checking')
-
-  useEffect(() => {
-    let ignore = false
-
-    checkHealth()
-      .then((ok) => {
-        if (!ignore) setStatus(ok ? 'connected' : 'failed')
-      })
-      .catch(() => {
-        if (!ignore) setStatus('failed')
-      })
-
-    return () => {
-      ignore = true
-    }
-  }, [])
-
   return (
-    <main className="page">
-      <h1 className="page-title">BuildLog</h1>
-      <p className="page-subtitle">학습한 내용과 해결한 오류를 기록하는 서비스입니다.</p>
-      <p className={`status status-${status}`} role="status">
-        {STATUS_MESSAGES[status]}
-      </p>
-    </main>
+    <AuthProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <HomePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <RequireAuth>
+                <AccountSettingsPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <GuestOnly>
+                <LoginPage />
+              </GuestOnly>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <GuestOnly>
+                <SignupPage />
+              </GuestOnly>
+            }
+          />
+          {/* 알 수 없는 주소는 홈으로 보냅니다. 로그인하지 않았다면 홈이 다시 로그인 화면으로 보냅니다. */}
+          <Route
+            path="*"
+            element={
+              <RequireAuth>
+                <HomePage />
+              </RequireAuth>
+            }
+          />
+        </Route>
+      </Routes>
+    </AuthProvider>
   )
 }
