@@ -24,3 +24,6 @@ coverage/
 # 로그 파일
 *.log
 logs/
+
+# 사용자가 올린 파일 (학습 자료함)
+backend/uploads/

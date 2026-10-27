@@ -29,6 +29,7 @@ async def validation_error_handler(_request: Request, error: RequestValidationEr
         message = str(first["ctx"]["error"])
     else:
         message = "입력한 내용을 확인해 주세요."
-    location = [part for part in first["loc"] if part != "body"]
+    # body/query/path는 값이 어디서 왔는지 알려주는 표시이므로 빼고, 입력 칸 이름만 남깁니다.
+    location = [part for part in first["loc"] if part not in ("body", "query", "path")]
     field = str(location[0]) if location else None
     return JSONResponse(_body(message, field), status_code=422)

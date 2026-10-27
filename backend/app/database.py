@@ -1,6 +1,6 @@
 """데이터베이스 연결을 만듭니다.
 
-`DATABASE_URL`이 가리키는 데이터베이스(개발·테스트는 SQLite)에 SQLAlchemy로 연결합니다.
+`DATABASE_URL`이 가리키는 데이터베이스(실제 사용은 Supabase PostgreSQL, 자동 테스트는 SQLite)에 SQLAlchemy로 연결합니다.
 """
 
 from collections.abc import Iterator
@@ -19,10 +19,15 @@ _is_sqlite = _url.get_backend_name() == "sqlite"
 if _is_sqlite and _url.database and _url.database != ":memory:":
     Path(_url.database).parent.mkdir(parents=True, exist_ok=True)
 
-engine = create_engine(
-    settings.database_url,
-    connect_args={"check_same_thread": False} if _is_sqlite else {},
-)
+if _is_sqlite:
+    engine = create_engine(settings.database_url, connect_args={"check_same_thread": False})
+else:
+    # pool_pre_ping: 끊어진 연결을 쓰기 전에 확인해 다시 연결합니다. (Supabase pooler는 오래 쉬면 연결을 끊습니다)
+    engine = create_engine(
+        settings.database_url,
+        pool_pre_ping=True,
+        connect_args={"connect_timeout": 10},
+    )
 
 if _is_sqlite:
 

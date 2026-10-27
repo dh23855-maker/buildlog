@@ -19,7 +19,7 @@ def test_구조_기록을_빈_데이터베이스에_적용하면_모델과_같�
     command.upgrade(config, "head")
 
     engine = create_engine(url)
-    assert {"users", "login_sessions"} <= set(inspect(engine).get_table_names())
+    assert {"users", "login_sessions", "materials"} <= set(inspect(engine).get_table_names())
     with engine.connect() as connection:
         differences = compare_metadata(MigrationContext.configure(connection), Base.metadata)
     assert differences == []
