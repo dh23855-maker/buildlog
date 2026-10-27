@@ -1,0 +1,614 @@
+/* 대시보드 화면 전용 스타일입니다. 모든 규칙이 .bl-dashboard 안에서만 적용되어 다른 화면에 영향을 주지 않습니다. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+.bl-dashboard {
+  --bl-bg: #f5f6f8;
+  --bl-white: #ffffff;
+  --bl-blue: #3182f6;
+  --bl-pale: #eaf3ff;
+  --bl-ink: #191f28;
+  --bl-muted: #6b7684;
+  --bl-line: #eef0f3;
+  --bl-green: #45ae31;
+  --bl-check-border: #d1d6db;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--bl-bg);
+  color: var(--bl-ink);
+  font-family: 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.bl-dashboard * {
+  box-sizing: border-box;
+}
+
+:where(.bl-dashboard) p,
+:where(.bl-dashboard) h1,
+:where(.bl-dashboard) h2,
+:where(.bl-dashboard) h3,
+:where(.bl-dashboard) ul {
+  margin: 0;
+  padding: 0;
+}
+
+.bl-dashboard ul {
+  list-style: none;
+}
+
+/* :where()는 우선순위를 0으로 만듭니다. 이 초기화 규칙이 .bl-new-button 같은 개별 규칙의 글자색을 덮어쓰지 않게 하기 위해서입니다. */
+:where(.bl-dashboard) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.bl-dashboard) button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- 왼쪽 메뉴 ---------- */
+.bl-sidebar {
+  display: flex;
+  flex: 0 0 224px;
+  flex-direction: column;
+  width: 224px;
+  padding: 24px;
+  background: var(--bl-white);
+}
+
+.bl-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 88px;
+}
+
+.bl-brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--bl-blue);
+  color: var(--bl-white);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 35px;
+}
+
+.bl-brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 33px;
+}
+
+.bl-workspace-label {
+  margin-bottom: 20px;
+  color: var(--bl-muted);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+}
+
+.bl-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 50px;
+  padding: 14px;
+  border-radius: 12px;
+  color: var(--bl-muted);
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.bl-menu-icon {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.bl-menu-item-active {
+  background: var(--bl-pale);
+  color: var(--bl-blue);
+  font-weight: 700;
+}
+
+.bl-sidebar-space {
+  flex: 1;
+  min-height: 20px;
+}
+
+.bl-divider {
+  height: 1px;
+  background: var(--bl-line);
+}
+
+.bl-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  margin-top: 18px;
+}
+
+.bl-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background: var(--bl-pale);
+  color: var(--bl-blue);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 23px;
+}
+
+.bl-account-name {
+  max-width: 116px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.bl-account-link {
+  display: block;
+  color: var(--bl-muted);
+  font-size: 12px;
+  line-height: 18px;
+  white-space: pre;
+}
+
+/* ---------- 본문 ---------- */
+.bl-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+  padding: 48px 48px 66px;
+}
+
+.bl-main > * {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.bl-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  color: var(--bl-muted);
+}
+
+.bl-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--bl-white);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  white-space: pre;
+}
+
+.bl-greeting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 94px;
+}
+
+.bl-greeting-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.bl-greeting-sub {
+  margin-top: 8px;
+  color: var(--bl-muted);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.bl-new-button {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 174px;
+  height: 50px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--bl-green);
+  color: var(--bl-white);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 23px;
+  white-space: pre;
+  cursor: default;
+}
+
+/* 요약 카드 */
+.bl-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bl-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 166px;
+  padding: 22px 26px;
+  border-radius: 22px;
+  background: var(--bl-white);
+}
+
+.bl-summary-label {
+  color: var(--bl-muted);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.bl-summary-value {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 54px;
+}
+
+.bl-summary-hint {
+  color: var(--bl-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* 최근 공부 기록 + 남은 할 일 */
+.bl-content {
+  display: grid;
+  grid-template-columns: 656fr 440fr;
+  gap: 24px;
+  height: 440px;
+}
+
+.bl-panel {
+  min-width: 0;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--bl-white);
+}
+
+.bl-recent {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.bl-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 34px;
+}
+
+.bl-section-title {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.bl-section-more {
+  color: var(--bl-muted);
+  font-size: 13px;
+  line-height: 20px;
+  white-space: pre;
+}
+
+.bl-study {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 88px;
+}
+
+.bl-study-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  height: 28px;
+}
+
+.bl-study-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.bl-study-date {
+  flex: 0 0 auto;
+  color: var(--bl-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.bl-study-summary {
+  color: var(--bl-muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.bl-tasks-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  height: 40px;
+}
+
+.bl-count-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: var(--bl-pale);
+  color: var(--bl-blue);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.bl-tasks-sub {
+  color: var(--bl-muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.bl-task-list {
+  margin-top: 20px;
+}
+
+.bl-task {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 57px;
+  cursor: pointer;
+}
+
+.bl-task-check {
+  flex: 0 0 21px;
+  width: 21px;
+  height: 21px;
+  margin: 0;
+  border: 1px solid var(--bl-check-border);
+  border-radius: 6px;
+  background: var(--bl-white);
+  appearance: none;
+  cursor: pointer;
+}
+
+.bl-task-check:checked {
+  border-color: var(--bl-blue);
+  background: var(--bl-blue)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 21'%3E%3Cpath d='M5.5 11l3.5 3.5 6.5-7' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 21px 21px no-repeat;
+}
+
+.bl-task-check:focus-visible {
+  outline: 2px solid var(--bl-blue);
+  outline-offset: 2px;
+}
+
+.bl-task-text {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.bl-task-check:checked + .bl-task-text {
+  color: var(--bl-muted);
+  text-decoration: line-through;
+}
+
+.bl-task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 42px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: var(--bl-bg);
+  color: var(--bl-muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  white-space: pre;
+}
+
+/* 완료율 띠 */
+.bl-completion {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  min-height: 112px;
+  padding: 26px;
+  border-radius: 22px;
+  background: var(--bl-pale);
+}
+
+.bl-completion-copy {
+  flex: 0 0 330px;
+}
+
+.bl-completion-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.bl-completion-sub {
+  margin-top: 5px;
+  color: var(--bl-muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.bl-progress {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  max-width: 540px;
+}
+
+.bl-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  color: var(--bl-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.bl-progress-percent {
+  color: var(--bl-blue);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.bl-progress-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: var(--bl-white);
+}
+
+.bl-progress-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--bl-blue);
+  transition: width 0.2s ease;
+}
+
+.bl-completion-count {
+  margin-left: auto;
+  padding-right: 24px;
+  color: var(--bl-blue);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.bl-footer {
+  display: flex;
+  justify-content: space-between;
+  color: var(--bl-muted);
+  font-size: 11px;
+  line-height: 17px;
+}
+
+/* 좁은 화면에서는 두 단 배치를 한 줄로 쌓습니다. (Figma에는 없는 최소한의 대응) */
+@media (max-width: 1100px) {
+  .bl-summary,
+  .bl-content {
+    grid-template-columns: 1fr;
+  }
+
+  .bl-content {
+    height: auto;
+  }
+
+  .bl-completion {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .bl-dashboard {
+    flex-direction: column;
+  }
+
+  .bl-sidebar {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .bl-sidebar-space {
+    display: none;
+  }
+
+  .bl-main {
+    padding: 24px 16px 48px;
+  }
+
+  .bl-greeting {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bl-completion-copy {
+    flex-basis: 100%;
+  }
+}
+
+/* ---------- 배경 이미지 위에 놓이는 요소 ----------
+   카드·사이드바 같은 흰 영역은 그대로 두고, 배경 위에 바로 놓이는 글자만 밝게 바꿉니다. */
+.bl-dashboard {
+  background: transparent;
+}
+
+.bl-sidebar {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+}
+
+.bl-topbar {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.bl-greeting-title {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.bl-greeting-sub {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.bl-footer {
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* 날짜 표시는 흰 알약 안에 있으므로 본문 위 글자색·그림자를 받지 않게 합니다. */
+.bl-date {
+  color: var(--bl-muted);
+  text-shadow: none;
+}

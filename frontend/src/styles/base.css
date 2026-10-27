@@ -19,7 +19,25 @@
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  /* 이미지를 불러오기 전·실패했을 때 보이는 밤하늘 색 */
+  background: #0b1437;
+}
+
+/* 모든 페이지의 배경 이미지. 화면 크기와 상관없이 고정되고, 스크롤해도 움직이지 않습니다. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #0b1437 url('../assets/background.jpg') 68% center / cover no-repeat;
+}
+
+/* 작은 화면에서는 가벼운 이미지를 쓰고, 토끼가 잘리지 않게 오른쪽을 더 보여줍니다. */
+@media (max-width: 900px) {
+  body::before {
+    background-image: url('../assets/background-small.jpg');
+    background-position: 78% center;
+  }
 }
 
 .page {
@@ -206,4 +224,53 @@ a {
 .info-list dd {
   margin: 0;
   overflow-wrap: anywhere;
+}
+
+/* ---------- 배경 이미지 위에 놓이는 요소 ----------
+   카드(.card)·상태 상자(.status) 같은 흰 영역은 그대로 두고,
+   어두운 배경 위에 바로 놓이는 글자만 밝게 바꿉니다. */
+.site-header {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: rgba(8, 16, 48, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.site-header .site-logo,
+.site-header .site-user {
+  color: #ffffff;
+}
+
+.site-header a,
+.site-header .link-button {
+  color: #cfe3ff;
+}
+
+.site-error {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.page-title {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.page-message {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.page-link {
+  color: #cfe3ff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
 }

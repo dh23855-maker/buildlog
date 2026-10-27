@@ -4,14 +4,33 @@ import { AuthProvider } from './AuthContext.jsx'
 import Layout from './components/Layout.jsx'
 import { GuestOnly, RequireAuth } from './components/RouteGuards.jsx'
 import AccountSettingsPage from './pages/AccountSettingsPage.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import MaterialsPage from './pages/MaterialsPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
+        {/* 대시보드는 자체 왼쪽 메뉴를 가지므로 공통 Layout(상단 바) 밖에 둡니다. */}
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <DashboardPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/materials"
+          element={
+            <RequireAuth>
+              <MaterialsPage />
+            </RequireAuth>
+          }
+        />
         <Route element={<Layout />}>
           <Route
             path="/"
